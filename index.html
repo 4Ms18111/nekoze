@@ -8,6 +8,7 @@
 </head>
 <body>
     <div>Teachable Machine Image Model</div>
+    <div>姿勢検知</div>
 <button type="button" onclick="init()">Start</button>
 <div id="webcam-container"></div>
 <div id="label-container"></div>
@@ -60,8 +61,13 @@
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
           if(prediction[1].probability.toFixed(2) > 0.80){
-            var audio = new Audio('不正解.mp3');
-           music.play();
+            audioElem = new Audio();
+            audioElem.src = "不正解.mp3";
+            audioElem = new Audio();
+        }
+            else if(prediction[1].probability.toFixed(2) < 0.50){
+                audioElem.pause();
+            }
         
         //for (let i = 0; i < maxPredictions; i++) {
           //  const classPrediction =
