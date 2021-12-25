@@ -8,7 +8,6 @@
 </head>
 <body>
 <div>Teachable Machine Image Model</div>
-<div>姿勢検知</div>
 <button type="button" onclick="init()">Start</button>
 <div id="webcam-container"></div>
 <div id="label-container"></div>
@@ -63,10 +62,7 @@ const music = new Audio('musics/不正解.mp3')
         const prediction = await model.predict(webcam.canvas);
         if(prediction[0].probability.toFixed(2) > 0.80){
             music.play();
-            count_up = function(){
-                count_value += 1;
-                count_disp.innerHTML = count_value;
-            }
+            
         }else {
             music.pause();
         }
