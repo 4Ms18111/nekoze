@@ -68,6 +68,7 @@
         if(prediction[1].probability.toFixed(2) > 0.80){
             var audio = new Audio('不正解.mp3');
             audio.play();
+            audio.loop = false;
             
         }
     }
