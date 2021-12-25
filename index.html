@@ -55,16 +55,17 @@
         await predict();
         window.requestAnimationFrame(loop);
     }
-const music = new Audio('musics/不正解.mp3')
+
     // run the webcam image through the image model
     async function predict() {
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
         if(prediction[0].probability.toFixed(2) > 0.80){
-            music.play();
+            var audio = new Audio('不正解.mp3');
+            audio.play();
             
         }else {
-            music.pause();
+            audio.pause();
         }
         
         //for (let i = 0; i < maxPredictions; i++) {
