@@ -7,10 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-    <div>Teachable Machine Image Model</div>
+<div>Teachable Machine Image Model</div>
+<div>姿勢検知</div>
 <button type="button" onclick="init()">Start</button>
 <div id="webcam-container"></div>
 <div id="label-container"></div>
+<div id="disp_count">0</div>
+var count_disp = document.getElementsByid("disp_count");
+var count_value = 0;
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
 <script type="text/javascript">
@@ -54,18 +58,26 @@
         await predict();
         window.requestAnimationFrame(loop);
     }
-
+const music = new Audio('musics/不正解.mp3')
     // run the webcam image through the image model
     async function predict() {
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
-         
-        
-        for (let i = 0; i < maxPredictions; i++) {
-            const classPrediction =
-                prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-            labelContainer.childNodes[i].innerHTML = classPrediction;
+        if(prediction[0].probability.toFixed(2) > 0.80){
+            music.play();
+            count_up = function(){
+                count_value += 1;
+                count_disp.innerHTML = count_value;
+            }
+        }else {
+            music.pause();
         }
+        
+        //for (let i = 0; i < maxPredictions; i++) {
+          //  const classPrediction =
+            //    prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+            //labelContainer.childNodes[i].innerHTML = classPrediction;
+        
 
     }
 </script>
