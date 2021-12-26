@@ -68,9 +68,9 @@
             labelContainer.childNodes[i].innerHTML = classPrediction;
         }
         if(prediction[1].probability.toFixed(2) > 0.85){
-            var audio = new Audio('不正解.mp3');
-            audio.play();
-            audio.loop = false;
+            const music = new Audio('不正解.mp3');
+            music.play();
+            music.loop = false;
             
         }
     }
